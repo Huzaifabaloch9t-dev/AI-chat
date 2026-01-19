@@ -44,7 +44,7 @@ export default function Signup() {
           Create Account 🚀
         </h1>
         <p className="text-center text-gray-500 text-sm mt-1">
-          Join us and start chatting with AI
+          Join us and Start Chatting with AI
         </p>
 
         {/* Error */}
