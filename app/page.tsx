@@ -1,9 +1,10 @@
 "use client";
-import { useState } from "react";
-import { login } from "../services/authService";
-import { Eye, EyeOff, Loader2 } from "lucide-react";
 
-export default function Login() {
+import { useState } from "react";
+import { Eye, EyeOff, Loader2 } from "lucide-react";
+import { login } from "@/services/authService";
+
+export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -19,8 +20,8 @@ export default function Login() {
     try {
       setLoading(true);
       setError("");
-      await login(email, password);
-      window.location.href = "/";
+      await login(email, password); // authService se login call
+      window.location.href = "/chat"; // ✅ redirect to chat
     } catch (err: any) {
       setError("Invalid email or password");
     } finally {
@@ -29,10 +30,8 @@ export default function Login() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-linear-to-br from-blue-100 to-indigo-200">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-100 to-indigo-200">
       <div className="w-full max-w-md bg-white rounded-2xl shadow-xl p-8">
-        
-        {/* Title */}
         <h1 className="text-2xl font-bold text-center text-gray-800">
           Welcome Back 👋
         </h1>
@@ -40,7 +39,6 @@ export default function Login() {
           Login to continue chatting with AI
         </p>
 
-        {/* Error */}
         {error && (
           <div className="mt-4 text-sm text-red-600 bg-red-50 p-2 rounded">
             {error}
@@ -54,6 +52,7 @@ export default function Login() {
             type="email"
             placeholder="you@example.com"
             className="mt-1 w-full rounded-lg border px-4 py-2 focus:ring-2 focus:ring-blue-500 outline-none"
+            value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
         </div>
@@ -66,6 +65,7 @@ export default function Login() {
               type={showPassword ? "text" : "password"}
               placeholder="••••••••"
               className="mt-1 w-full rounded-lg border px-4 py-2 pr-10 focus:ring-2 focus:ring-blue-500 outline-none"
+              value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
             <button
