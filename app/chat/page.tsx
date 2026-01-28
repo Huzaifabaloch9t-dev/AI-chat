@@ -13,6 +13,7 @@ export default function ChatPage() {
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
 
+  // ✅ Updated sendMessage with backend call
   const sendMessage = async () => {
     if (!input.trim()) return;
 
@@ -21,15 +22,24 @@ export default function ChatPage() {
     setInput("");
     setLoading(true);
 
-    // 🔹 Dummy AI response (replace with backend later)
-    setTimeout(() => {
-      const aiMessage: Message = {
-        role: "ai",
-        text: "Hello 👋 Main tumhara AI hoon. Backend connect karo to real AI milay ga 😄",
-      };
+    try {
+      // Backend request
+      const res = await fetch("http://localhost:5000/api/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ message: input }),
+      });
+
+      const data = await res.json();
+
+      const aiMessage: Message = { role: "ai", text: data.reply };
       setMessages((prev) => [...prev, aiMessage]);
+    } catch (err) {
+      const aiMessage: Message = { role: "ai", text: "AI error 😢" };
+      setMessages((prev) => [...prev, aiMessage]);
+    } finally {
       setLoading(false);
-    }, 1000);
+    }
   };
 
   return (
