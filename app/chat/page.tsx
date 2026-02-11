@@ -13,8 +13,7 @@ export default function ChatPage() {
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
 
-  // ✅ Updated sendMessage with backend call
-  const sendMessage = async () => {
+    const sendMessage = async () => {
     if (!input.trim()) return;
 
     const userMessage: Message = { role: "user", text: input };
