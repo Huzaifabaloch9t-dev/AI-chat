@@ -23,7 +23,7 @@ export default function ChatPage() {
 
     try {
 
-      
+
       const res = await fetch("http://localhost:5000/api/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -44,7 +44,6 @@ export default function ChatPage() {
 
   return (
     <div className="h-screen flex flex-col bg-gray-100">
-      {/* Header */}
       <div className="p-4 bg-blue-600 text-white font-semibold text-lg">
         🤖 AI Chat
       </div>
