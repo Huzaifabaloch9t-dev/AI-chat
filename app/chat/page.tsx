@@ -43,7 +43,6 @@ export default function ChatPage() {
     }
   };
 
-  // Auto scroll to bottom
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages, loading]);
@@ -52,7 +51,6 @@ export default function ChatPage() {
     <div className="h-screen bg-gradient-to-br from-blue-50 to-gray-100 flex items-center justify-center">
       <div className="w-full max-w-md h-[90vh] bg-white rounded-2xl shadow-xl flex flex-col overflow-hidden">
 
-        {/* Header */}
         <div className="px-5 py-4 bg-blue-600 text-white flex items-center justify-between">
           <div>
             <h2 className="font-semibold text-lg">🤖 AI Assistant</h2>
@@ -60,7 +58,6 @@ export default function ChatPage() {
           </div>
         </div>
 
-        {/* Chat Area */}
         <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-gray-50">
           {messages.map((msg, i) => (
             <div
@@ -88,7 +85,6 @@ export default function ChatPage() {
           <div ref={bottomRef} />
         </div>
 
-        {/* Input */}
         <div className="p-4 border-t bg-white flex gap-2">
           <input
             value={input}
